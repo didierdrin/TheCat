@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "842513566584",
+    "firebase_url": "https://thecatbabalao-d2b66.firebaseio.com",
+    "project_id": "thecatbabalao-d2b66",
+    "storage_bucket": "thecatbabalao-d2b66.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842513566584:android:03a9625cabe3fe0f7c168d",
+        "android_client_info": {
+          "package_name": "com.example.thecat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "842513566584-gq3tnv5g2uv86dre79ctgrlj9voo95m9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuB7hqee4n1x5i5EKBzlPK4hckNFuRm4A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "842513566584-gq3tnv5g2uv86dre79ctgrlj9voo95m9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
