@@ -15,7 +15,7 @@ class UploadPage extends StatefulWidget {
 
 class UploadPageState extends State<UploadPage> {
   String id;
-  final db = Firestore.instance;
+  final db = FirebaseFirestore.instance;
   final _formKey = GlobalKey<FormState>();
   String title;
   String subtitle;
@@ -25,6 +25,7 @@ class UploadPageState extends State<UploadPage> {
   // Image picking
   File sampleImage;
   Future getImage() async {
+    // ignore: deprecated_member_use
     var tempImage = await ImagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
       sampleImage = tempImage;
@@ -34,6 +35,7 @@ class UploadPageState extends State<UploadPage> {
   // Video picking
   File sampleVideo;
   Future getVideo() async {
+    // ignore: deprecated_member_use
     var tempVideo = await ImagePicker.pickVideo(source: ImageSource.gallery);
     setState(() {
       sampleVideo = tempVideo;
@@ -93,17 +95,21 @@ class UploadPageState extends State<UploadPage> {
                       ? Text('Select an Image')
                       : enableUpload(),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: getImage,
                   child:
                       Text('Add Image', style: TextStyle(color: Colors.white)),
-                  color: Colors.orange,
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.orange,
+                  ),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: getVideo,
                   child:
                       Text('Add Video', style: TextStyle(color: Colors.white)),
-                  color: Colors.green,
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green,
+                  ),
                 ),
               ],
             ),
@@ -111,15 +117,19 @@ class UploadPageState extends State<UploadPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              RaisedButton(
+              ElevatedButton(
                 onPressed: createData,
                 child: Text('Create', style: TextStyle(color: Colors.white)),
-                color: Colors.green,
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.green,
+                ),
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: id != null ? readData : null,
                 child: Text('Read', style: TextStyle(color: Colors.white)),
-                color: Colors.orange,
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.orange,
+                ),
               ),
             ],
           ),
@@ -129,34 +139,36 @@ class UploadPageState extends State<UploadPage> {
   }
 
   void readData() async {
-    DocumentSnapshot snapshot = await db.collection('posts').document(id).get();
+    // DocumentSnapshot snapshot = await db.collection('posts').document(id).get();
   }
 
   void createData() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      DocumentReference ref = await db
+      /* DocumentReference ref = await db
           .collection('posts')
           .add({'title': '$title', 'subtitle': '$subtitle', 'image': '$url'});
       Scaffold.of(context).showSnackBar(const SnackBar(
-        content: Text('Successfully Stored !'),
-      ));
+        content: Text('Successfully Stored !'), 
+      )); */
     }
   }
 
   Widget enableUpload() {
     int randomNumber = Random().nextInt(100000);
-    String imageTitle = 'image${randomNumber}';
-    String videoTitle = 'video${randomNumber}';
+    String imageTitle = 'image$randomNumber';
+    String videoTitle = 'video$randomNumber';
 
     return Container(
       child: Column(
         children: <Widget>[
           Image.file(sampleImage, height: 200.0, width: 200.0),
-          RaisedButton(
-              elevation: 7.0,
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                textStyle: TextStyle(color: Colors.blue),
+                elevation: 7.0,
+              ),
               child: Text('Upload Image'),
-              textColor: Colors.blue,
               onPressed: () async {
                 final StorageReference firebaseStorageRef =
                     FirebaseStorage.instance.ref().child(imageTitle);

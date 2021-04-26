@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 // Plugins
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:async';
 import 'dart:core';
 
 class TodayPage extends StatefulWidget {
@@ -13,8 +12,8 @@ class TodayPage extends StatefulWidget {
 
 class TodayPageState extends State<TodayPage> {
   String id;
-  final db = Firestore.instance;
-  final _formKey = GlobalKey<FormState>();
+  final db = FirebaseFirestore.instance;
+  // final _formKey = GlobalKey<FormState>();
   String name;
 
   Map<String, dynamic> data() {
@@ -60,12 +59,13 @@ class TodayPageState extends State<TodayPage> {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
-                                      image: NetworkImage('${doc.data()['image']}'),
+                                      image: NetworkImage(
+                                          '${doc.data()['image']}'),
                                       fit: BoxFit.cover,
-                                      ),
                                     ),
                                   ),
                                 ),
+                              ),
                               Align(
                                 alignment: Alignment(0.0, 1.0),
                                 child: Container(
@@ -74,40 +74,45 @@ class TodayPageState extends State<TodayPage> {
                                   child: Stack(
                                     children: <Widget>[
                                       Positioned(
-                                top: 10.0,
-                                left: 0.0,
-                                child: Text('${doc.data()['title']}',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                              ),
-                              Positioned(
-                                top: 30.0,
-                                left: 0.0,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Align(
-                                      alignment: Alignment(0.0, 0.0),
-                                      child: SizedBox(
-                                        height: 60.0,
-                                        width: 230.0,
-                                        child: Text('${doc.data()['subtitle']}',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                    )),
+                                        top: 10.0,
+                                        left: 0.0,
+                                        child: Text('${doc.data()['title']}',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            )),
+                                      ),
+                                      Positioned(
+                                        top: 30.0,
+                                        left: 0.0,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: <Widget>[
+                                            Align(
+                                              alignment: Alignment(0.0, 0.0),
+                                              child: SizedBox(
+                                                height: 60.0,
+                                                width: 230.0,
+                                                child: Text(
+                                                    '${doc.data()['subtitle']}',
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    )),
+                                              ),
+                                            ),
+                                            IconButton(
+                                              icon: Icon(Icons.bookmark),
+                                              onPressed: () {},
+                                              color: Colors.grey[400],
+                                            ),
+                                          ],
                                         ),
                                       ),
-
-                                    IconButton(icon: Icon(Icons.bookmark), onPressed: () {}, color: Colors.grey[400],),
-                                  ],
-                                  ),
-                                ),
                                     ],
-                                    ),
                                   ),
                                 ),
-                              
+                              ),
                             ],
                           ),
                         ),
@@ -134,7 +139,7 @@ class TodayPageState extends State<TodayPage> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Column(
-                    children: snapshot.data.documents
+                    children: snapshot.data.docs
                         .map((doc) => buildItem(doc))
                         .toList(),
                   );
@@ -146,10 +151,10 @@ class TodayPageState extends State<TodayPage> {
       ),
     );
   }
-
+/*
   void _pushPage(BuildContext context, page) {
     Navigator.of(context).push(
       MaterialPageRoute<void>(builder: (_) => page),
     );
-  }
+  } */
 }

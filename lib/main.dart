@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:async';
-// Page Import 
+// Page Import
 import 'Pages/Homepage.dart';
 
 void main() async {
@@ -20,8 +17,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.red,
-        ),
+      ),
       home: HomePage(title: 'TheCatBabalao'),
-      );
+    );
   }
 }
